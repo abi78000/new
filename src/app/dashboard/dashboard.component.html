@@ -1,0 +1,64 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" opened class="sidenav">
+    <div class="logo">
+      <mat-icon>restaurant_menu</mat-icon> POS
+    </div>
+    <mat-nav-list>
+
+      <!-- Dashboard -->
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="active-link">
+        <mat-icon>dashboard</mat-icon>
+        <span>Dashboard</span>
+      </a>
+
+      <!-- Menu -->
+      <a mat-list-item routerLink="/menu" routerLinkActive="active-link">
+        <mat-icon>restaurant_menu</mat-icon>
+        <span>Menu</span>
+      </a>
+
+      <!-- Master Submenu -->
+      <mat-expansion-panel [expanded]="isMenuExpanded" (opened)="isMenuExpanded = true" (closed)="isMenuExpanded = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>list</mat-icon>
+            Master
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-action-list>
+          <a mat-list-item routerLink="/menu-list" routerLinkActive="active-link">
+            <mat-icon>list</mat-icon>
+            <span>Company Master</span>
+          </a>
+          <a mat-list-item routerLink="/menu-form" routerLinkActive="active-link">
+            <mat-icon>inventory</mat-icon>
+            <span>Item Master</span>
+          </a>
+          <a mat-list-item routerLink="/reports" routerLinkActive="active-link">
+            <mat-icon>inventory</mat-icon>
+            <span>Item Master</span>
+          </a>
+        </mat-action-list>
+      </mat-expansion-panel>
+
+      <!-- Orders -->
+      <a mat-list-item routerLink="/orders" routerLinkActive="active-link">
+        <mat-icon>receipt_long</mat-icon>
+        <span>Orders</span>
+      </a>
+
+      <!-- Settings -->
+      <a mat-list-item routerLink="/settings" routerLinkActive="active-link">
+        <mat-icon>settings</mat-icon>
+        <span>Settings</span>
+      </a>
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Main content area -->
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

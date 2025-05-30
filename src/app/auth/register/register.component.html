@@ -1,0 +1,52 @@
+<mat-card style="background-color: #f0f7ff; border-radius: 10px; padding: 20px;">
+    <h2 style="font-size: 1.5em; font-weight: bold; color: #3f51b5;">
+        <mat-icon>person_add</mat-icon> Register
+    </h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  
+        <mat-form-field class="full-width" appearance="outline" style="margin-bottom: 20px;">
+            <mat-label>Name</mat-label>
+            <mat-icon matPrefix>person</mat-icon>
+            <input matInput formControlName="name" required>
+            <mat-error *ngIf="registerForm.controls['name'].hasError('required')">Name is required</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="full-width" appearance="outline" style="margin-bottom: 20px;">
+            <mat-label>Mobile Number</mat-label>
+            <mat-icon matPrefix>smartphone</mat-icon>
+            <input matInput formControlName="mobile" required>
+            <mat-error *ngIf="registerForm.controls['mobile'].hasError('required')">Mobile number is required</mat-error>
+            <mat-error *ngIf="registerForm.controls['mobile'].hasError('pattern')">Invalid mobile number</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="full-width" appearance="outline" style="margin-bottom: 20px;">
+            <mat-label>Password</mat-label>
+            <mat-icon matPrefix>vpn_key</mat-icon>
+            <input matInput type="password" formControlName="password" required>
+            <mat-error *ngIf="registerForm.controls['password'].hasError('required')">Password is required</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="full-width" appearance="outline" style="margin-bottom: 20px;">
+            <mat-label>Confirm Password</mat-label>
+            <mat-icon matPrefix>check</mat-icon>
+            <input matInput type="password" formControlName="confirmPassword" required>
+            <mat-error *ngIf="registerForm.controls['confirmPassword'].hasError('required')">Confirm Password is required</mat-error>
+            <mat-error *ngIf="registerForm.hasError('passwordMismatch')">Passwords do not match</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="full-width" appearance="outline" style="margin-bottom: 20px;">
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="role" required>
+                <mat-option value="admin">Admin</mat-option>
+                <mat-option value="kitchen">Kitchen</mat-option>
+                <mat-option value="customer">Customer</mat-option>
+            </mat-select>
+            <mat-error *ngIf="registerForm.controls['role'].hasError('required')">Role is required</mat-error>
+        </mat-form-field>
+  
+        <button mat-raised-button color="primary" class="full-width" style="border-radius: 5px;" [disabled]="registerForm.invalid">Register</button>
+    </form>
+  
+    <button mat-button color="primary" (click)="goToLogin()" style="color: #3f51b5;">Already registered? Login</button>
+  </mat-card>
+  

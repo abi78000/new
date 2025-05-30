@@ -1,0 +1,95 @@
+<div class="page-container">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <h1>Restaurant Management System</h1>
+    </div>
+    <div class="topbar-utilities">
+      <!-- Add any utilities you need (e.g., user profile, logout button) -->
+    </div>
+  </header>
+
+  <!-- Main Content with Left (Menu) and Right (Cart) -->
+  <div class="main-content">
+  
+    <!-- Left Side: Menu Items -->
+    <div class="left-container">
+      <div class="menu-container">
+        <div class="menu-list">
+          <mat-card class="menu-card" *ngFor="let item of menuItems">
+            <div class="menu-item-content">
+              <!-- Image on the left -->
+              <img *ngIf="item.imageBase64" [src]="sanitizeImage(item.imageBase64)" alt="{{ item.itemName }}" class="menu-item-image" />
+              
+              <!-- Details on the right -->
+              <div class="menu-item-details">
+                <h3>{{ item.itemName }}</h3>
+                <p><strong>Item Code:</strong> {{ item.itemCode }}</p>
+                <p><strong>Description:</strong> {{ item.description }}</p>
+                <p><strong>Sales Rate:</strong> ₹{{ item.salesRate }}</p>
+                <p><strong>GST %:</strong> {{ item.gstPercentage }}%</p>
+
+                <!-- Add to Cart Button -->
+                <button class="button" mat-raised-button color="primary" (click)="addToCart(item)">Add to Cart</button>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side: Cart -->
+    <div class="cart-container">
+      <div class="bill-tabs">
+        <button *ngFor="let bill of bills; let i = index" 
+                mat-stroked-button 
+                [color]="activeBillIndex === i ? 'accent' : ''"
+                (click)="switchBill(i)">
+          Bill {{ i + 1 }}
+        </button>
+      </div>
+
+      <h2>Your Cart - Bill {{ activeBillIndex + 1 }}</h2>
+
+      <!-- Empty Cart Message -->
+      <div *ngIf="getActiveCartItems().length === 0" class="empty-cart">
+        <p>Your cart is empty. Add items from the menu.</p>
+      </div>
+
+      <!-- Cart Items -->
+      <div *ngFor="let item of getActiveCartItems()" class="cart-item">
+        <mat-card class="cart-item-card">
+          <div class="cart-item-details">
+            <h3>{{ item.itemName }}</h3>
+            <p><strong>Sales Rate:</strong> ₹{{ item.salesRate }}</p>
+
+            <div class="quantity-controls">
+              <!-- Decrease Quantity Button -->
+              <button mat-icon-button color="primary" (click)="decreaseQuantity(item)">
+                <mat-icon>remove</mat-icon>
+              </button>
+
+              <span class="quantity-display">{{ item.quantity }}</span>
+
+              <!-- Increase Quantity Button -->
+              <button mat-icon-button color="primary" (click)="increaseQuantity(item)">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+
+            <p><strong>Item Total:</strong> ₹{{ item.quantity * item.salesRate }}</p>
+
+            <!-- Remove Item Button -->
+            <button mat-raised-button color="warn" (click)="removeFromCart(item)">Remove</button>
+          </div>
+        </mat-card>
+      </div>
+
+      <!-- Total Amount -->
+      <div class="cart-total" *ngIf="getActiveCartItems().length > 0">
+        <h3>Total Amount: ₹{{ getTotalPrice() }}</h3>
+        <button mat-raised-button color="accent" (click)="checkout()">Checkout</button>
+      </div>
+    </div>
+  </div>
+</div>

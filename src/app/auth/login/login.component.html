@@ -1,0 +1,43 @@
+<div class="login-wrapper">
+    <mat-card class="login-card">
+      <div class="login-header">
+        <mat-icon class="login-icon">login</mat-icon>
+        <h2>Login</h2>
+      </div>
+  
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Mobile Number</mat-label>
+          <mat-icon matPrefix>phone_iphone</mat-icon>
+          <input matInput formControlName="mobile" placeholder="Enter mobile number">
+          <mat-error *ngIf="loginForm.get('mobile')?.hasError('required')">
+            Mobile number is required
+          </mat-error>
+          <mat-error *ngIf="loginForm.get('mobile')?.hasError('pattern')">
+            Enter a valid 10-digit mobile number
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <mat-icon matPrefix>lock</mat-icon>
+          <input matInput type="password" formControlName="password" placeholder="Enter password">
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+            Password is required
+          </mat-error>
+          <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
+            Minimum 6 characters required
+          </mat-error>
+        </mat-form-field>
+  
+        <button mat-raised-button color="primary" class="full-width login-button" [disabled]="loginForm.invalid">
+          Login
+        </button>
+      </form>
+  
+      <button mat-button (click)="goToRegister()" class="register-button">
+        Don't have an account? Register
+      </button>
+    </mat-card>
+  </div>
+  

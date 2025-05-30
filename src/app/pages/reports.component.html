@@ -1,0 +1,95 @@
+<div class="report-container mat-elevation-z2">
+  <!-- Header -->
+  <div class="report-header">
+    <h2>Billing Reports</h2>
+    <p class="subtitle">Analyze daily transactions, taxes, and payment methods</p>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="summary-cards">
+    <mat-card class="summary-card" *ngFor="let metric of summaryMetrics">
+      <mat-card-title>{{ metric.title }}</mat-card-title>
+      <mat-card-content>{{ metric.value }}</mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters filter-row">
+    <mat-form-field appearance="outline">
+      <mat-label>Report Type</mat-label>
+      <mat-select [(ngModel)]="selectedReport">
+        <mat-option *ngFor="let type of reportTypes" [value]="type">{{ type }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>From Date</mat-label>
+      <input matInput [matDatepicker]="fromPicker" [(ngModel)]="fromDate" />
+      <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+      <mat-datepicker #fromPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>To Date</mat-label>
+      <input matInput [matDatepicker]="toPicker" [(ngModel)]="toDate" />
+      <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+      <mat-datepicker #toPicker></mat-datepicker>
+    </mat-form-field>
+
+    <div class="filter-actions">
+      <button mat-flat-button color="primary" (click)="fetchReport()">
+        <mat-icon>search</mat-icon> Search
+      </button>
+
+      <button mat-stroked-button color="accent" (click)="exportToPDF()">
+        <mat-icon>picture_as_pdf</mat-icon> PDF
+      </button>
+
+      <button mat-stroked-button color="accent" (click)="exportToExcel()">
+        <mat-icon>grid_on</mat-icon> Excel
+      </button>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrapper">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 report-table">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let row"> {{ row.id }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="customerName">
+        <th mat-header-cell *matHeaderCellDef> Customer </th>
+        <td mat-cell *matCellDef="let row"> {{ row.customerName }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="itemName">
+        <th mat-header-cell *matHeaderCellDef> Item </th>
+        <td mat-cell *matCellDef="let row"> {{ row.itemName }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="paymentMethod">
+        <th mat-header-cell *matHeaderCellDef> Payment </th>
+        <td mat-cell *matCellDef="let row"> {{ row.paymentMethod }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalAmount">
+        <th mat-header-cell *matHeaderCellDef> Amount </th>
+        <td mat-cell *matCellDef="let row"> ₹{{ row.totalAmount | number: '1.2-2' }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let row"> {{ row.createdAt | date: 'short' }} </td>
+      </ng-container>
+
+      <!-- More columns if needed -->
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

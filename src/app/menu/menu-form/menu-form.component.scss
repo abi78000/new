@@ -1,0 +1,65 @@
+.menu-form {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 100%; /* Full width inside panel */
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.left-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+mat-form-field, mat-slide-toggle, input[type="file"], button {
+  width: 100%;
+}
+
+.header, .footer {
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  background-color: #163057; /* Material Blue 700 */
+  padding: 5px; /* Optional: for better spacing */
+}
+
+.image-preview {
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #ccc;
+  padding: 12px;
+  background-color: #f9f9f9;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 250px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+mat-form-field {
+  width: 100%;
+}
+
+button[type="submit"] {
+  align-self: flex-end;
+}
