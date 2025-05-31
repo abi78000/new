@@ -5,6 +5,7 @@ import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 
 
+
 bootstrapApplication(AppComponent, {
   providers: [
     provideHttpClient(), // ✅ Register HttpClient globally

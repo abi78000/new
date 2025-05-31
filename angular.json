@@ -26,7 +26,12 @@
         "core-js",
         "html2canvas",
         "canvg",
-        "jspdf"
+        "jspdf",
+        "jspdf",
+        "html2canvas",
+        "raf",
+        "rgbcolor",
+        "core-js"
             ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
@@ -69,6 +74,9 @@
           },
           "defaultConfiguration": "production"
         },
+
+
+  
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
@@ -112,4 +120,6 @@
   "cli": {
     "analytics": "b27c0c15-16fb-4dcb-9737-ecbbec796f95"
   }
+
+  
 }
