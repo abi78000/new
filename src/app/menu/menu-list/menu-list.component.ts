@@ -125,7 +125,7 @@ export class MenuListComponent implements OnInit {
     };
 
     // Send POST request to save the bill
-    this.http.post('https://localhost:7212/api/bills/saveBill', billRequest).subscribe(
+    this.http.post('https://pan-s30t.onrender.com/api/bills/saveBill', billRequest).subscribe(
       (response: any) => {
         console.log('Bill saved successfully', response);
         alert('Bill saved successfully. Total Amount: ₹' + response.TotalAmount);

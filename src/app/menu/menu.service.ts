@@ -21,7 +21,7 @@ export interface MenuItem {
   providedIn: 'root',
 })
 export class MenuService {
-  private baseUrl = 'https://localhost:7212/api/menuitems';
+  private baseUrl = 'https://pan-s30t.onrender.com/api/menuitems';
 
   constructor(private http: HttpClient) {}
 

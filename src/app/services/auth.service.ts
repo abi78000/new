@@ -23,7 +23,8 @@ export interface AuthResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'https://localhost:7212/api/auth'; // Adjust to production URL if needed
+  // Updated base URL to deployed API on Render
+  private baseUrl = 'https://pan-s30t.onrender.com/api/auth';
   private tokenKey = 'jwt_token';
 
   constructor(private http: HttpClient) {}
@@ -87,4 +88,3 @@ export class AuthService {
     return throwError(() => msg);
   }
 }
-
